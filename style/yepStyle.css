@@ -94,3 +94,6 @@ h2{
 li{
 	background: #BD9FD4 !important;
 }
+.ui-panel-wrapper{
+	background: inherit !important;
+}
