@@ -86,9 +86,16 @@ h2{
 	background: #34005C;
 }
 #menu  a{
+		border: 0px black SOLID;
 		background: inherit;
 		border-top: 0px;
 		color: black;
+}
+#menuList > li{
+	border: 0px black SOLID;
+}
+.userStatus{
+	border-radius: 15px;
 }
 .ui-li-divider{
 	background: #A173FF !important;
