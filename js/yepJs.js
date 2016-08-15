@@ -1,9 +1,24 @@
 
-var _userID = Cookies.get("_userId"),_token = Cookies.get("_password");
+var _userID = Cookies.get("_userId")
+var _token = Cookies.get("_token");
 var _markers = [];
 var map;
+var _loginState
+var defualtErr = function(err){alert(err);};
 
-function doAjax(webService,_data,_function){
+
+function getLoginStatus(_userID,_token){
+    if(_userID === undefined || _token === undefined)
+    {
+        return undefined;
+    }
+    doAjax("GetSession",JSON.stringify({UserID: _userID, SessionID:_token}),function(data){
+            data = JSON.parse(data.d);
+            alert(data);
+     },
+     function(err){ alert(err); } );
+}// this function validate session
+function doAjax(webService,_data,_function,_functionError){
 
     var WebServiceURL = "http://proj.ruppin.ac.il/cegroup3/prod/IceWS.asmx";
     $.support.cors = true;
@@ -13,9 +28,7 @@ function doAjax(webService,_data,_function){
         type: "POST",
         data: _data,
         contentType: "application/json; charset=utf-8",
-        error: function (err) {
-            alert("error: " + err);
-        },
+        error: _functionError,
         success: _function
     });
 
@@ -70,13 +83,9 @@ $(document).on("pagecreate","#branches",function(){
         });
         $branchesSelect.val($branchesSelect.children().first().attr('value')).change();
     }
- );
-});
+ ,defualtErr);
+}); //this function handle branches page
 
-function initBranches(data){
-
-	//var _data = JSON,parse(data);
-}
 
 $(document).one('pagebeforecreate', function () {
 	var panel = buildMenu();
@@ -101,6 +110,7 @@ $(document).on("pageshow", "#branches", function(event){
 
 
 function setMenu(pageId){
+
 		$("#menu li").each(function(){
 		var link = $(this).find("a");
 		var liId = $(this).attr('id');
@@ -114,8 +124,12 @@ function setMenu(pageId){
 			 link.attr('class','ui-btn ui-btn-icon-right ui-icon-carat-r');
 		}
 
-		$("#menuList").listview("refresh");
 	});
+         $("<li>").html( $("<div>").addClass('ui-grid-a userStatus').attr({id:'statusBar'}).html( 
+            $('<div>').addClass('ui-block-a').attr({id: 'btnStatusUser'}) ).append( 
+                $('<div>').addClass('ui-block-b').attr({id: 'btnStatusState'}) ) ).prependTo($("#menuList"));
+        
+        $("#menuList").listview("refresh");
 } // this function recive a pageId and init the menu by this page id.
 
 function buildMenu(){		
