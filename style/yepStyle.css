@@ -59,6 +59,7 @@ h2{
 }
 
 .body-post{
+    overflow:hidden;
 	border-top: 3px solid #595959;
 	word-wrap: break-word;
 }
@@ -72,6 +73,9 @@ h2{
 .seperator{
 	margin: 6px;
 }
+.seperatorMini{
+	height:0px;
+}
 .menuLink > img{
 	float:right;
 	margin: 1px;
@@ -82,9 +86,16 @@ h2{
 	background: #34005C;
 }
 #menu  a{
+		border: 0px black SOLID;
 		background: inherit;
 		border-top: 0px;
 		color: black;
+}
+#menuList > li{
+	border: 0px black SOLID;
+}
+.userStatus{
+	border-radius: 15px;
 }
 .ui-li-divider{
 	background: #A173FF !important;
@@ -93,4 +104,39 @@ h2{
 }
 li{
 	background: #BD9FD4 !important;
+}
+.ui-panel-wrapper{
+	background: inherit !important;
+}
+#map-canvas{
+    margin: 15px auto;
+    box-shadow: #34005C 0px 0px 2px 0px;
+	background: black;
+	width: 95%;
+	height: 400px;
+}
+#txtSelectedBranche{
+    color: #BD9FD4;
+    text-shadow: #34005C 1px 1px 0px;
+}
+#myTr{
+    display: inline-flex !important;
+}
+h3{
+    margin: 4px auto;
+    padding-left:5px;
+}
+.color-text-gray{
+    color:#808080;
+}
+.no-margin{
+    margin:0px;
+}
+.margin-5{
+        margin:5px;
+}
+.margin-left-15{
+    margin-left:15px;
+    padding-right:15px;
+    border-right:#808080 solid 2px;
 }
